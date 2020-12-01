@@ -1,11 +1,17 @@
 import datetime
 import os
+import signal
 import subprocess
 import time
+from time import sleep
 
 from flask import Blueprint
 
-from autolab_device_api.constants import BAG_RECORDER_DIR, BAG_RECORDER_MAX_DURATION_SECS
+from autolab_device_api.constants import (
+    BAG_RECORDER_DIR,
+    BAG_RECORDER_MAX_DURATION_SECS,
+    BAG_RECORDER_STOP_WAIT_TIME_SECS,
+)
 from autolab_device_api.utils import response_ok, response_error
 from autolab_device_api.knowledge_base import KnowledgeBase
 
@@ -47,8 +53,18 @@ def _bag_recorder_stop(bag_name: str):
     if proc is None:
         return response_error(f"No bag with name {bag_name} is being recorded")
     # stop recording
-    proc.terminate()
-    time.sleep(1)
+    os.killpg(os.getpgid(proc.pid), signal.SIGINT)
+
+    # wait for a certain time and check the process is stopped
+    
+    wait_secs = 0
+    while wait_secs < BAG_RECORDER_STOP_WAIT_TIME_SECS:
+        if proc.poll() is None:
+            wait_secs += 1
+            time.sleep(1)
+        else:
+            break
+
     # verify stopped
     try:
         assert(not proc.poll() is None)
@@ -57,6 +73,6 @@ def _bag_recorder_stop(bag_name: str):
 
     # return current API bag_recorder
     return response_ok({
-        'local_path': os.path.join(BAG_RECORDER_DIR, bag_name),
-        'url': f'http://{get_device_hostname()}.local/files/logs/bags/{bag_name}'
+        'path_on_robot': os.path.join(BAG_RECORDER_DIR, bag_name),
+        'download_url': f'http://{get_device_hostname()}.local/files/logs/bags/{bag_name}'
     })
