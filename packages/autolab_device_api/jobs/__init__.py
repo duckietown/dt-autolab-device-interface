@@ -1,4 +1,4 @@
-from code_api.knowledge_base import KnowledgeBase
+from autolab_device_api.knowledge_base import KnowledgeBase
 
 from .update_checker import UpdateCheckerWorker
 from .update_module import UpdateModuleWorker

@@ -1,7 +1,7 @@
 from flask import Blueprint
 
-from code_api.constants import API_VERSION
-from code_api.utils import response_ok
+from autolab_device_api.constants import API_VERSION
+from autolab_device_api.utils import response_ok
 
 
 version = Blueprint('version', __name__)

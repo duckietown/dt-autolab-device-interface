@@ -1,8 +1,8 @@
 import docker.errors
 from flask import Blueprint
 
-from code_api.constants import ContainerStatus
-from code_api.utils import response_ok, get_client
+from autolab_device_api.constants import ContainerStatus
+from autolab_device_api.utils import response_ok, get_client
 
 
 status = Blueprint('container_status', __name__)

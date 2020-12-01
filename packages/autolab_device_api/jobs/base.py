@@ -1,7 +1,7 @@
 import logging
 
-from code_api import logger
-from code_api.knowledge_base import KnowledgeBase
+from autolab_device_api import logger
+from autolab_device_api.knowledge_base import KnowledgeBase
 
 
 class Job(object):

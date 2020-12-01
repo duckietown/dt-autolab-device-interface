@@ -1,7 +1,7 @@
 import sys
 from dt_class_utils import DTProcess, AppStatus
 
-from code_api.api import AutolabDeviceAPI
+from autolab_device_api.api import AutolabDeviceAPI
 
 CODE_API_PORT = 9091
 
