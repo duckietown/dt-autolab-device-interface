@@ -9,6 +9,7 @@ from flask_cors import CORS
 from .actions.version import version as api_version
 from .actions.bag.recorder.all import bag_recorder
 from .actions.car.estop.all import car_estop
+from .actions.map.svg.all import map_svg_draw
 
 
 class AutolabDeviceAPI(Flask):
@@ -37,12 +38,17 @@ class AutolabDeviceAPI(Flask):
             # (/bag/recorder/*)
             bag_recorder: [
                 RobotType.duckiebot,
-                RobotType.watchtower
+                RobotType.watchtower,
             ],
 
             # (/car/estop/*)
             car_estop: [
-                RobotType.duckiebot
+                RobotType.duckiebot,
+            ],
+
+            # (/map/svg)
+            map_svg_draw: [
+                RobotType.duckietown,
             ],
         }
 
