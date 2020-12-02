@@ -3,7 +3,6 @@ import os
 import signal
 import subprocess
 import time
-from time import sleep
 
 from flask import Blueprint
 
