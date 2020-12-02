@@ -36,10 +36,7 @@ class AutolabDeviceAPI(Flask):
             api_version: RobotType.lst_all(),
 
             # (/bag/recorder/*)
-            bag_recorder: [
-                RobotType.duckiebot,
-                RobotType.watchtower,
-            ],
+            bag_recorder: RobotType.lst_all(),
 
             # (/car/estop/*)
             car_estop: [
