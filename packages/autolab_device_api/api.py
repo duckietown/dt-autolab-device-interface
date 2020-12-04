@@ -7,7 +7,6 @@ from flask import Flask
 from flask_cors import CORS
 
 from .actions.version import version as api_version
-from .actions.car.estop.all import car_estop
 from .actions.map.svg.all import map_svg_draw
 
 
@@ -33,11 +32,6 @@ class AutolabDeviceAPI(Flask):
         api_filter = {
             # (/version)
             api_version: RobotType.lst_all(),
-
-            # (/car/estop/*)
-            car_estop: [
-                RobotType.duckiebot,
-            ],
 
             # (/map/svg)
             map_svg_draw: [
