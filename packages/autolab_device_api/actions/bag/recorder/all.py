@@ -34,5 +34,5 @@ def _bar_recorder_stop(bag_name: str):
     # return current API bar_recorder
     return response_ok({
         'local_path': f'/data/logs/bags/{bag_name}.bag',
-        'url': f'http://{get_device_hostname()}.local/files/logs/bags/{bag_name}.bag'
+        'url': f'http://{get_device_hostname()}.local/files/data/logs/bags/{bag_name}.bag'
     })
